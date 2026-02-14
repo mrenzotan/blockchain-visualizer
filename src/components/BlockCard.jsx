@@ -39,11 +39,11 @@ export default function BlockCard({ block, isInvalid, onEdit, onRemine, isMining
 
   return (
     <div
-      className={`group relative flex-shrink-0 w-64 bg-white rounded-lg shadow-sm p-5 transition-all ${
+      className={`group relative flex-shrink-0 w-80 aspect-square bg-white rounded-lg shadow-sm p-6 transition-all ${
         isInvalid ? 'ring-2 ring-red-500' : ''
       }`}
     >
-      <div className="space-y-3">
+      <div className="flex flex-col justify-between h-full">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
             Block #{block.index}
@@ -98,7 +98,7 @@ export default function BlockCard({ block, isInvalid, onEdit, onRemine, isMining
               <button onClick={handleCancelEdit} className="text-xs px-2 py-1 bg-zinc-200 rounded">X</button>
             </div>
           ) : (
-            <p className="text-sm text-zinc-900 break-all">{block.data}</p>
+            <p className="text-sm text-zinc-900 break-all line-clamp-2">{block.data}</p>
           )}
         </div>
 
