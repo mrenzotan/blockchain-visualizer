@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Hash, Clock, Check, X, File, Settings, Star } from 'lucide-react';
 
 /** Formats a Unix timestamp into a localized 12-hour time string (e.g., '2:30:45 PM'). */
 function formatTimestamp(timestamp) {
@@ -14,28 +15,6 @@ function formatTimestamp(timestamp) {
 function truncateHash(hash) {
   if (!hash || hash.length <= 16) return hash;
   return hash.slice(0, 8) + '...' + hash.slice(-6);
-}
-
-/** Renders a small SVG hash/pound icon used as a label prefix for hash fields. */
-function HashIcon({ className = '' }) {
-  return (
-    <svg
-      width='12'
-      height='12'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      className={className}
-    >
-      <line x1='4' y1='9' x2='20' y2='9' />
-      <line x1='4' y1='15' x2='20' y2='15' />
-      <line x1='10' y1='3' x2='8' y2='21' />
-      <line x1='16' y1='3' x2='14' y2='21' />
-    </svg>
-  );
 }
 
 /** Renders an individual block's details (index, timestamp, data, hashes, nonce) with inline editing and re-mining capabilities. */
@@ -88,19 +67,7 @@ export default function BlockCard({
                 {isGenesis ? 'GENESIS BLOCK' : 'BLOCK'}
               </span>
               <div className='flex items-center gap-1 text-xs text-slate-400 mt-0.5'>
-                <svg
-                  width='10'
-                  height='10'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <circle cx='12' cy='12' r='10' />
-                  <polyline points='12 6 12 12 16 14' />
-                </svg>
+                <Clock size={10} />
                 <span
                   className='cursor-help relative'
                   onMouseEnter={() => setShowTooltip('timestamp')}
@@ -120,37 +87,12 @@ export default function BlockCard({
           <div className='flex items-center gap-1'>
             {!isInvalid && (
               <div className='w-6 h-6 rounded-full bg-cyber-green/15 flex items-center justify-center'>
-                <svg
-                  width='12'
-                  height='12'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2.5'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  className='text-cyber-green'
-                >
-                  <polyline points='20 6 9 17 4 12' />
-                </svg>
+                <Check size={12} strokeWidth={2.5} className='text-cyber-green' />
               </div>
             )}
             {isInvalid && (
               <div className='w-6 h-6 rounded-full bg-cyber-red/15 flex items-center justify-center'>
-                <svg
-                  width='12'
-                  height='12'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2.5'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  className='text-cyber-red'
-                >
-                  <line x1='18' y1='6' x2='6' y2='18' />
-                  <line x1='6' y1='6' x2='18' y2='18' />
-                </svg>
+                <X size={12} strokeWidth={2.5} className='text-cyber-red' />
               </div>
             )}
           </div>
@@ -159,20 +101,7 @@ export default function BlockCard({
         {/* Data field */}
         <div>
           <div className='flex items-center gap-1.5 mb-1'>
-            <svg
-              width='11'
-              height='11'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              className='text-slate-500'
-            >
-              <path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' />
-              <polyline points='14 2 14 8 20 8' />
-            </svg>
+            <File size={11} className='text-slate-500' />
             <span className='text-xs font-medium text-slate-400 uppercase tracking-wider'>
               Data
             </span>
@@ -210,20 +139,7 @@ export default function BlockCard({
         <div className='grid grid-cols-2 gap-3'>
           <div>
             <div className='flex items-center gap-1.5 mb-1'>
-              <svg
-                width='11'
-                height='11'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-slate-500'
-              >
-                <circle cx='12' cy='12' r='3' />
-                <path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z' />
-              </svg>
+              <Settings size={11} className='text-slate-500' />
               <span className='text-xs font-medium text-slate-400 uppercase tracking-wider'>
                 Nonce
               </span>
@@ -236,19 +152,7 @@ export default function BlockCard({
           </div>
           <div>
             <div className='flex items-center gap-1.5 mb-1'>
-              <svg
-                width='11'
-                height='11'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-slate-500'
-              >
-                <polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
-              </svg>
+              <Star size={11} className='text-slate-500' />
               <span className='text-xs font-medium text-slate-400 uppercase tracking-wider'>
                 Difficulty
               </span>
@@ -264,7 +168,7 @@ export default function BlockCard({
         {/* Previous Hash */}
         <div>
           <div className='flex items-center gap-1.5 mb-1'>
-            <HashIcon className='text-slate-500' />
+            <Hash size={12} className='text-slate-500' />
             <span className='text-xs font-medium text-slate-400 uppercase tracking-wider'>
               Previous Hash
             </span>
@@ -288,7 +192,7 @@ export default function BlockCard({
         {/* Current Hash */}
         <div>
           <div className='flex items-center gap-1.5 mb-1'>
-            <HashIcon className='text-slate-500' />
+            <Hash size={12} className='text-slate-500' />
             <span className='text-xs font-medium text-slate-400 uppercase tracking-wider'>
               Current Hash
             </span>
