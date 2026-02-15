@@ -26,7 +26,7 @@ export default function App() {
         resetChain={resetChain}
       />
 
-      <main className="flex-1">
+      <main>
         <div className="overflow-x-auto">
           <BlockchainView
             chain={blockchain.chain}
