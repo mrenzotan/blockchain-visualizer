@@ -1,12 +1,14 @@
 import { Block } from './Block.js';
 import { DEFAULT_DIFFICULTY, GENESIS_BLOCK_DATA } from '../constants.js';
 
+/** Manages the full chain of blocks, including genesis block creation, difficulty settings, and chain validation. */
 export class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = DEFAULT_DIFFICULTY;
   }
 
+  /** Creates the first block in the chain with default data and a previous hash of '0'. */
   createGenesisBlock() {
     return new Block({
       index: 0,
@@ -16,6 +18,7 @@ export class Blockchain {
     });
   }
 
+  /** Validates the entire chain by checking each block's hash integrity and link to its predecessor, returning invalid block indices. */
   validateChain() {
     const invalidBlocks = [];
     let cascading = false;

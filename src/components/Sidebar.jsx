@@ -3,6 +3,7 @@ import DifficultySelector from './DifficultySelector.jsx';
 import AutoMine from './AutoMine.jsx';
 import TransactionLedger from './TransactionLedger.jsx';
 
+/** Alternative layout component that renders mining controls, difficulty selector, auto-mine, and transaction ledger in a horizontal header arrangement. */
 export default function Sidebar({
   addBlock,
   isMining,

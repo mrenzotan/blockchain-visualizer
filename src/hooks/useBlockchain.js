@@ -3,6 +3,7 @@ import { Blockchain } from '../models/Blockchain.js';
 import { Block } from '../models/Block.js';
 import { mine } from '../services/miningService.js';
 
+/** Central state management hook that provides the blockchain instance, mining state, and all mutation callbacks to the UI. */
 export function useBlockchain() {
   const [blockchain, setBlockchain] = useState(() => new Blockchain());
   const [isMining, setIsMining] = useState(false);
@@ -11,12 +12,14 @@ export function useBlockchain() {
 
   const validationResult = blockchain.validateChain();
 
+  /** Creates a shallow clone of the blockchain to trigger a React re-render after mutations. */
   const triggerUpdate = useCallback((bc) => {
     const updated = Object.assign(Object.create(Object.getPrototypeOf(bc)), bc);
     updated.chain = [...bc.chain];
     setBlockchain(updated);
   }, []);
 
+  /** Creates a new block with the given data, mines it at the current difficulty, and appends it to the chain. */
   const addBlock = useCallback(async (data) => {
     if (!data || !data.trim()) return;
     if (isMining) return;
@@ -44,6 +47,7 @@ export function useBlockchain() {
     }
   }, [blockchain, isMining, triggerUpdate]);
 
+  /** Updates the data field of an existing block, invalidating its hash to demonstrate tampering. */
   const editBlockData = useCallback((blockIndex, newData) => {
     const block = blockchain.chain[blockIndex];
     if (!block) return;
@@ -51,6 +55,7 @@ export function useBlockchain() {
     triggerUpdate(blockchain);
   }, [blockchain, triggerUpdate]);
 
+  /** Re-mines a specific block to restore hash validity after its data has been edited. */
   const remineBlock = useCallback(async (blockIndex) => {
     if (isMining) return;
     const block = blockchain.chain[blockIndex];
@@ -73,6 +78,7 @@ export function useBlockchain() {
     }
   }, [blockchain, isMining, triggerUpdate]);
 
+  /** Automatically generates and mines a specified number of blocks with sequential transaction data. */
   const autoMine = useCallback(async (count) => {
     if (isMining || count < 1) return;
 
@@ -103,6 +109,7 @@ export function useBlockchain() {
     }
   }, [blockchain, isMining, triggerUpdate]);
 
+  /** Updates the mining difficulty level (1–4), controlling how many leading zeros a valid hash requires. */
   const setDifficulty = useCallback((level) => {
     const d = Number(level);
     if (!Number.isInteger(d) || d < 1 || d > 4) return;
@@ -110,6 +117,7 @@ export function useBlockchain() {
     triggerUpdate(blockchain);
   }, [blockchain, triggerUpdate]);
 
+  /** Replaces the blockchain with a fresh instance containing only the genesis block, preserving the current difficulty. */
   const resetChain = useCallback(() => {
     const fresh = new Blockchain();
     fresh.difficulty = blockchain.difficulty;

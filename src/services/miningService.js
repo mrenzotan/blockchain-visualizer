@@ -1,6 +1,7 @@
 import { calculateBlockHash } from './hashService.js';
 import { MINE_BATCH_SIZE } from '../constants.js';
 
+/** Performs proof-of-work mining by incrementing a nonce until the hash meets the difficulty target. Yields to the event loop periodically to keep the UI responsive. */
 export async function mine(block, difficulty) {
   const target = '0'.repeat(difficulty);
   const start = performance.now();

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+/** Provides the text input and submit button for manually mining a new block with user-specified data. */
 export default function MiningForm({ addBlock, isMining, lastMineTime }) {
   const [data, setData] = useState('');
   const [error, setError] = useState('');
