@@ -1,7 +1,7 @@
 import { useBlockchain } from '../hooks/useBlockchain.js';
+import Header from './Header.jsx';
 import BlockchainView from './BlockchainView.jsx';
-import Sidebar from './Sidebar.jsx';
-import ValidationIndicator from './ValidationIndicator.jsx';
+import ControlPanel from './ControlPanel.jsx';
 
 export default function App() {
   const {
@@ -19,22 +19,14 @@ export default function App() {
   } = useBlockchain();
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-950">
-      <Sidebar
-        addBlock={addBlock}
-        isMining={isMining}
-        miningProgress={miningProgress}
-        lastMineTime={lastMineTime}
-        difficulty={blockchain.difficulty}
-        setDifficulty={setDifficulty}
-        autoMine={autoMine}
-        chain={blockchain.chain}
+    <div className="min-h-screen bg-dark-800 text-slate-200 flex flex-col">
+      <Header
+        chainLength={blockchain.chain.length}
+        validationResult={validationResult}
         resetChain={resetChain}
       />
-      <main className="pt-6">
-        <div className="max-w-6xl mx-auto px-8">
-          <ValidationIndicator validationResult={validationResult} />
-        </div>
+
+      <main className="flex-1">
         <div className="overflow-x-auto">
           <BlockchainView
             chain={blockchain.chain}
@@ -45,6 +37,17 @@ export default function App() {
           />
         </div>
       </main>
+
+      <ControlPanel
+        addBlock={addBlock}
+        isMining={isMining}
+        lastMineTime={lastMineTime}
+        difficulty={blockchain.difficulty}
+        setDifficulty={setDifficulty}
+        autoMine={autoMine}
+        miningProgress={miningProgress}
+        chain={blockchain.chain}
+      />
     </div>
   );
 }

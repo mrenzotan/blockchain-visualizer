@@ -16,28 +16,35 @@ export default function MiningForm({ addBlock, isMining, lastMineTime }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
-      <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Mine Block</h2>
-      <div className="flex gap-2">
+    <form onSubmit={handleSubmit} className="flex-1 space-y-3">
+      <div className="flex gap-3">
         <input
           type="text"
           value={data}
           onChange={(e) => { setData(e.target.value); setError(''); }}
-          placeholder="Enter transaction data..."
-          className="w-56 px-3 py-2 text-sm bg-zinc-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-300"
+          placeholder="Enter block data..."
+          className="flex-1 px-4 py-3 text-sm glass-input rounded-xl text-white placeholder-slate-500"
           disabled={isMining}
         />
         <button
           type="submit"
           disabled={isMining}
-          className="px-4 py-2 text-sm font-medium bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-3 text-sm font-semibold bg-cyber-blue text-white rounded-xl hover:bg-cyber-blue/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all glow-blue"
         >
-          {isMining ? 'Mining...' : 'Mine'}
+          {isMining ? (
+            <span className="flex items-center gap-2">
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              Mining...
+            </span>
+          ) : 'Mine Block'}
         </button>
       </div>
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-cyber-red">{error}</p>}
       {lastMineTime !== null && !isMining && (
-        <p className="text-xs text-zinc-400">Mined in {lastMineTime}ms</p>
+        <p className="text-xs text-slate-500">Mined in {lastMineTime}ms</p>
       )}
     </form>
   );

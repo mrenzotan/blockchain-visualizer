@@ -9,8 +9,8 @@ export default function AutoMine({ autoMine, isMining, miningProgress }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Auto Mine</h2>
+    <form onSubmit={handleSubmit} className="space-y-2">
+      <h3 className="text-xs font-medium text-slate-400 uppercase tracking-wider">Auto Mine</h3>
       <div className="flex gap-2">
         <input
           type="number"
@@ -18,21 +18,30 @@ export default function AutoMine({ autoMine, isMining, miningProgress }) {
           max="50"
           value={count}
           onChange={(e) => setCount(Number(e.target.value))}
-          className="w-20 px-3 py-2 text-sm bg-zinc-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-300"
+          className="w-20 px-3 py-2 text-sm glass-input rounded-lg text-white text-center font-mono"
           disabled={isMining}
         />
         <button
           type="submit"
           disabled={isMining}
-          className="flex-1 px-4 py-2 text-sm font-medium bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 text-sm font-medium bg-cyber-green/15 text-cyber-green rounded-lg hover:bg-cyber-green/25 disabled:opacity-30 disabled:cursor-not-allowed transition-colors border border-cyber-green/20"
         >
-          Auto Mine
+          Generate
         </button>
       </div>
       {miningProgress && (
-        <p className="text-xs text-zinc-400">
-          Mining block {miningProgress.current} of {miningProgress.total}...
-        </p>
+        <div className="space-y-1">
+          <div className="flex justify-between text-xs text-slate-400">
+            <span>Mining block {miningProgress.current}/{miningProgress.total}</span>
+            <span>{Math.round((miningProgress.current / miningProgress.total) * 100)}%</span>
+          </div>
+          <div className="w-full h-1 bg-dark-500 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-cyber-green rounded-full transition-all duration-300"
+              style={{ width: `${(miningProgress.current / miningProgress.total) * 100}%` }}
+            />
+          </div>
+        </div>
       )}
     </form>
   );
