@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+/** Provides controls to automatically generate and mine a batch of blocks, displaying progress during the operation. */
 export default function AutoMine({ autoMine, isMining, miningProgress }) {
   const [count, setCount] = useState(5);
 

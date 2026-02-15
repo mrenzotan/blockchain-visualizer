@@ -1,3 +1,4 @@
+/** Renders a visual chain-link connector between adjacent BlockCards in the blockchain view. */
 export default function BlockArrow() {
   return (
     <div className='shrink-0 flex items-center px-3'>

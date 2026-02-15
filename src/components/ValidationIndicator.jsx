@@ -1,3 +1,4 @@
+/** Displays a styled badge indicating whether the blockchain is currently valid or invalid. */
 export default function ValidationIndicator({ validationResult }) {
   const isValid = validationResult.isValid;
 

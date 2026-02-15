@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+/** Renders a collapsible list of all blocks in reverse chronological order, showing each block's index, data, and truncated hash. */
 export default function TransactionLedger({ chain }) {
   const [isOpen, setIsOpen] = useState(false);
 

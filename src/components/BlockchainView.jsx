@@ -1,6 +1,7 @@
 import BlockCard from './BlockCard.jsx';
 import BlockArrow from './BlockArrow.jsx';
 
+/** Renders the horizontal chain of BlockCards connected by BlockArrows, highlighting invalid blocks. */
 export default function BlockchainView({ chain, invalidBlocks = [], onEdit, onRemine, isMining }) {
   return (
     <div className="overflow-x-auto py-8 px-6">

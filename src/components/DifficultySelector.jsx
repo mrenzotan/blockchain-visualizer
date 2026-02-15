@@ -1,3 +1,4 @@
+/** Renders a range slider for adjusting the mining difficulty level from 1 (easy) to 4 (hard). */
 export default function DifficultySelector({ difficulty, setDifficulty }) {
   return (
     <div className="space-y-2">

@@ -1,3 +1,4 @@
+/** Renders the top navigation bar displaying the chain height, validation status, and reset button. */
 export default function Header({ chainLength, validationResult, resetChain }) {
   const isValid = validationResult.isValid;
 

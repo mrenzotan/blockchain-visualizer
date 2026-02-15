@@ -3,6 +3,7 @@ import DifficultySelector from './DifficultySelector.jsx';
 import AutoMine from './AutoMine.jsx';
 import TransactionLedger from './TransactionLedger.jsx';
 
+/** Renders the bottom control section containing the mining form, difficulty selector, auto-mine controls, and transaction ledger. */
 export default function ControlPanel({
   addBlock,
   isMining,
