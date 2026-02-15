@@ -46,7 +46,7 @@ export default function BlockCard({ block, isInvalid, onEdit, onRemine, isMining
 
   return (
     <div
-      className={`group relative flex-shrink-0 w-72 glass-card glass-card-hover rounded-xl p-5 transition-all duration-300 ${
+      className={`group relative shrink-0 w-72 glass-card glass-card-hover rounded-xl p-5 transition-all duration-300 ${
         isInvalid ? 'border-cyber-red/40 glow-red' : ''
       }`}
     >
@@ -71,17 +71,17 @@ export default function BlockCard({ block, isInvalid, onEdit, onRemine, isMining
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
                 <span
-                  className="cursor-help"
+                  className="cursor-help relative"
                   onMouseEnter={() => setShowTooltip('timestamp')}
                   onMouseLeave={() => setShowTooltip(null)}
                 >
                   {formatTimestamp(block.timestamp)}
+                  {showTooltip === 'timestamp' && (
+                    <span className="absolute z-10 top-full left-0 mt-1 px-2 py-1 bg-dark-900 text-white text-xs rounded shadow-lg whitespace-nowrap font-mono border border-slate-700">
+                      {new Date(block.timestamp).toISOString()}
+                    </span>
+                  )}
                 </span>
-                {showTooltip === 'timestamp' && (
-                  <div className="absolute z-10 top-12 left-12 px-2 py-1 bg-dark-900 text-white text-xs rounded shadow-lg whitespace-nowrap font-mono border border-slate-700">
-                    {new Date(block.timestamp).toISOString()}
-                  </div>
-                )}
               </div>
             </div>
           </div>
